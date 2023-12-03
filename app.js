@@ -20,8 +20,7 @@ form.addEventListener('submit' , (e)=>{
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
-      alert(user.uid)
-      window.location = "home.html"
+      window.location = "dashboard.html"
       
     })
     .catch((error) => {
@@ -64,7 +63,6 @@ github.addEventListener('click' , ()=>{
     console.log(token);
     const user = result.user;
     console.log(user);
-    alert('jkjkkj')
     window.location = "home.html"
   }).catch((error) => {
     const errorMessage = error.message;
