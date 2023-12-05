@@ -1,7 +1,7 @@
 
 import { signInWithEmailAndPassword  ,  GoogleAuthProvider,GithubAuthProvider , signInWithPopup} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-import {auth} from "./config.js"
+import { collection, addDoc  } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import {auth, db} from "./config.js"
 
 const form = document.querySelector('#form')
 const email = document.querySelector('#email')
@@ -42,7 +42,18 @@ google.addEventListener('click' , ()=>{
     console.log(token);
     const user = result.user;
     console.log(user);
-    window.location = "home.html"
+    addDoc(collection(db , 'users'), {
+      firstName: user.displayName,
+      email: user.email, 
+      profileurl:user.photoURL,
+      uid:user.uid
+    })
+    .then((res) => {
+      console.log(res);
+      window.location = 'dashboard.html'
+  }).catch((err) => {
+      console.log(err);
+  })
     
   }).catch((error) => {
     const errorMessage = error.message;
@@ -63,7 +74,18 @@ github.addEventListener('click' , ()=>{
     console.log(token);
     const user = result.user;
     console.log(user);
-    window.location = "home.html"
+    addDoc(collection(db , 'users'), {
+      firstName: user.displayName,
+      email: user.email, 
+      profileurl:user.photoURL,
+      uid:user.uid
+    })
+    .then((res) => {
+      console.log(res);
+      window.location = 'dashboard.html'
+  }).catch((err) => {
+      console.log(err);
+  })
   }).catch((error) => {
     const errorMessage = error.message;
     console.log(errorMessage);

@@ -23,27 +23,48 @@ signin.addEventListener('click' , ()=>{
 
 
 
-form.addEventListener('submit' , (event)=>{
-    event.preventDefault()
-    if(password.value === repeatpassword.value){
-    createUserWithEmailAndPassword(auth, email.value, password.value)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    console.log(user);
-    window.location = "index.html"
-        })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
-  });
-}else{
-    alert('enter correct password')
-}
-firstname.value = ""
-lastname.value = ""
-email.value = ""
-  password.value = ""
-  repeatpassword.value = ""
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (password.value !== repeatpassword.value) {
+      alert('password are not same');
+      return
+  }
+  const file = img.files[0]
+  const storageRef = ref(storage, firstname.value);
+  uploadBytes(storageRef, file).then(() => {
+      getDownloadURL(storageRef).then((url) => {
+          createUserWithEmailAndPassword(auth, email.value, password.value)
+              .then((userCredential) => {
+                  const user = userCredential.user;
+                  console.log(user);
+                  addDoc(collection(db, "users"), {
+                      firstName: firstname.value,
+                      lastName: lastname.value,
+                      email: email.value,
+                      uid: user.uid,
+                      profileUrl: url
+                  }).then((res) => {
+                      console.log(res);
+                      window.location = 'index.html'
+                  }).catch((err) => {
+                      console.log(err);
+                  })
+              })
+      })
+          .catch((error) => {
+              const errorMessage = error.message;
+              console.log(errorMessage);
+          });
+  })
+
+      .catch((error) => {
+          const errorMessage = error.message;
+          console.log(errorMessage);
+      });
+      // email.value = ''
+      // password.value = ''
+      // repeatpassword.value = ''
+      // firstname.value = ''
+      // lastname.value = ''
 
 })
