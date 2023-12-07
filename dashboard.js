@@ -13,10 +13,10 @@ const names = document.querySelector('#name')
 
 
 
-let picobj = {}
+let picobj;
 //login and logout function
 onAuthStateChanged(auth, async (user) => {
-    array = []
+    
     if (user) {
         const uid = user.uid;
         console.log(uid);
@@ -24,7 +24,6 @@ onAuthStateChanged(auth, async (user) => {
 
         const querySnapshot = await getDocs(a);
         querySnapshot.forEach((doc) => {
-            console.log(doc.data());
             picobj = doc.data()
             console.log(picobj);
             names.innerHTML = `<p>${picobj.firstName}</p>`
@@ -57,32 +56,42 @@ function renderpost() {
     maindiv.innerHTML = ''
     array.forEach((item) => {
         console.log(item);
-        maindiv.innerHTML += `<div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-lg  mb-12  shadow-xl pl-5">
-                <div class="flex flex-wrap gap-4 pt-6">
-                 <div class="rounded-md"><img class="w-20 h-20  rounded-md" src="${picobj.profileurl}" alt=""></div>
-<div>
-                <div>
+        maindiv.innerHTML += `
+        <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-lg  mb-12  shadow-xl pl-3 sm:pl-5">
+        <div class=" gap-4 pt-6">
+        
+         <div class="rounded-md">
+         <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
+         </div>
 
-             <p class="text-2xl"> ${item.text}</p>
-              </div>
-              <div class="flex flex-wrap gap-3" >
-               <p>${picobj.firstName}</p>
-               <p>${item.postDate.seconds}</p> 
-               </div> 
-               </div>
-               </div>
-            
+        <div>
+
+     <p class="text-2xl"> ${item.text}</p>
+      </div>
+      <div class="flex flex-wrap gap-3" >
+      <div>
+       <p>${item.picobj.firstName}</p>
+       </div>
+       <div>
+
+       <p>${item.postDate.seconds}</p> 
+       </div>
+       </div>
     
-               <div class="mt-3">
-                <p>${item.area}</p>
-                </div>
-            
-                <div class="flex gap-4 mt-3 pb-6">
+<div class="flex flex-wrap">
+
+
+       <div class="mt-3">
+        <p>${item.area}</p>
+        </div>
+        </div>
+        <div class="flex gap-4 mt-3 pb-6">
                 <button id="delete">Delete</button>
                 <button id="edit">Edit</button>
                 </div>
                 </div>
-                `
+        </div>`
+        
     })
     const delet = document.querySelectorAll('#delete')
     delet.forEach((item, index) => {
@@ -126,6 +135,7 @@ form.addEventListener('submit', async (event) => {
             area: area.value,
             uid: auth.currentUser.uid,
             postDate: Timestamp.fromDate(new Date()),
+            picobj
 
         }
         const docRef = await addDoc(collection(db, "post"), postObj);

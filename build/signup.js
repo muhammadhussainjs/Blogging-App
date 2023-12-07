@@ -42,10 +42,10 @@ form.addEventListener('submit', (event) => {
                       lastName: lastname.value,
                       email: email.value,
                       uid: user.uid,
-                      profileUrl: url
+                      profileurl: url
                   }).then((res) => {
                       console.log(res);
-                      window.location = 'index.html'
+                      window.location = "index.html"
                   }).catch((err) => {
                       console.log(err);
                   })
