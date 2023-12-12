@@ -45,7 +45,7 @@ form.addEventListener('submit', (event) => {
                       profileurl: url
                   }).then((res) => {
                       console.log(res);
-                      window.location = "index.html"
+                      window.location = "login.html"
                   }).catch((err) => {
                       console.log(err);
                   })

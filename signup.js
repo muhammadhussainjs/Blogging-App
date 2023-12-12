@@ -1,8 +1,8 @@
-import {createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import {createUserWithEmailAndPassword , updateProfile } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 import {auth ,db , storage} from "./config.js"
 
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { collection, addDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js'
 
 
@@ -24,47 +24,48 @@ signin.addEventListener('click' , ()=>{
 
 
 form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (password.value !== repeatpassword.value) {
-      alert('password are not same');
-      return
-  }
-  const file = img.files[0]
-  const storageRef = ref(storage, firstname.value);
-  uploadBytes(storageRef, file).then(() => {
-      getDownloadURL(storageRef).then((url) => {
-          createUserWithEmailAndPassword(auth, email.value, password.value)
-              .then((userCredential) => {
-                  const user = userCredential.user;
-                  console.log(user);
-                  addDoc(collection(db, "users"), {
-                      firstName: firstname.value,
-                      lastName: lastname.value,
-                      email: email.value,
-                      uid: user.uid,
-                      profileurl: url
-                  }).then((res) => {
-                      console.log(res);
-                      window.location = "index.html"
-                  }).catch((err) => {
-                      console.log(err);
-                  })
-              })
-      })
-          .catch((error) => {
-              const errorMessage = error.message;
-              console.log(errorMessage);
-          });
+    event.preventDefault();
+    if (password.value !== repeatpassword.value) {
+        alert('password are not same');
+        return
+    }
+    const file = img.files[0]
+    const storageRef = ref(storage, firstname.value);
+    uploadBytes(storageRef, file).then(() => {
+        getDownloadURL(storageRef).then((url) => {
+            createUserWithEmailAndPassword(auth, email.value, password.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user);
+                    addDoc(collection(db, "users"), {
+                        firstName: firstname.value,
+                        lastName: lastname.value,
+                        email: email.value,
+                        uid: user.uid,
+                        profileurl: url,
+                        Password : password.value
+                    }).then((res) => {
+                        console.log(res);
+                        window.location = "login.html"
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+                })
+        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
+    })
+  
+        .catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+        });
+        // email.value = ''
+        // password.value = ''
+        // repeatpassword.value = ''
+        // firstname.value = ''
+        // lastname.value = ''
+  
   })
-
-      .catch((error) => {
-          const errorMessage = error.message;
-          console.log(errorMessage);
-      });
-      // email.value = ''
-      // password.value = ''
-      // repeatpassword.value = ''
-      // firstname.value = ''
-      // lastname.value = ''
-
-})

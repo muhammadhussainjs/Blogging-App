@@ -5,37 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.8/dist/full.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./dist/output.css">
-    <title>home</title>
+    <title>dashboard</title>
 </head>
 <body class="bg-[#f8f9fa]">
-    <div class="navbar bg-primary text-primary-content justify-between bg-[#7c47f6]">
-     <div>   <p class="text-xl">PersonalBloggingApp</p>
+    <div class="navbar bg-primary text-primary-content gap-4 flex-wrap justify-around bg-[#7c47f6]">
+     <div>  
+       <p class="text-xl">PersonalBloggingApp</p>
      </div>
-        <div class="gap-4">
-      <div id="name"></div>
+     <div class="gap-6">
+  
+     <div id="name">
+    </div>
+      <div>
+        <button><a href="./profile.html">Profile</a></button>
+      </div>
+       
+    <div class="gap-4">
         <button class="btn btn-ghost text-xl" id="logout">logout</button>
+        </div>
         </div>
       </div>
     
 
       
-      <div class="p-6  bg-[#fefefe]">
+      <div class="p-6 md:pl-60 pl-16 bg-[#fefefe]">
         <h1 class="text-2xl font-bold ">Dashboard</h1>
       </div>
       
-      <div class="shadow-xl bg-[#ffffff]   sm:ml-28  rounded-md mt-4 w-3/5">
+      <div class="shadow-xl bg-[#ffffff]  md:ml-60 ml-16 rounded-md mt-4 w-3/5">
     <form id="form">
-      <input type="text" id="texts" placeholder=" placeholder" class="p-4 ml-2 mt-4 sm:w-3/4 sm:ml-12 rounded-md"><br>
-     <br> <input type="text" id="textarea" placeholder="  What is your mind" class="  sm:w-3/4  h-32  ml-2 sm:ml-12 rounded-md">
+      <input type="text" id="texts" placeholder=" placeholder" class="h-12 ml-4 mt-4 w-3/4 md:ml-12 rounded-md"><br>
+     <br> <input type="text" id="textarea" placeholder="  What is your mind" class="  w-3/4  h-32  ml-4 sm:ml-12 rounded-md">
       <br><br>
-      <button class="btn btn-primary bg-[#7c47f6] mb-4 sm:ml-12 ml-2">Publishblogs</button>
+      <button class="btn btn-primary bg-[#7c47f6] mb-4 md:ml-12 ml-4">Publishblogs</button>
     </form>
       </div>
       
       <div class="mt-6">
-      <h1 class="text-3xl sm:ml-28 ml-2">My Blogs</h1>
+      <h1 class="text-3xl md:ml-60 ml-16">My Blogs</h1>
       </div >
-      <div id="maindiv" class=" sm:ml-28 w-3/5 ml-2 " >
+      <div id="maindiv" class=" md:ml-60 ml-16 w-3/5  " >
     </div>
 
 
