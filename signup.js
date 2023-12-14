@@ -16,7 +16,7 @@ const img = document.querySelector('#img')
 const signin = document.querySelector('#signin')
 
 signin.addEventListener('click' , ()=>{
-  window.location = "index.html"
+  window.location = "login.html"
 })
 
 
@@ -42,8 +42,7 @@ form.addEventListener('submit', (event) => {
                         lastName: lastname.value,
                         email: email.value,
                         uid: user.uid,
-                        profileurl: url,
-                        Password : password.value
+                        profileurl: url
                     }).then((res) => {
                         console.log(res);
                         window.location = "login.html"

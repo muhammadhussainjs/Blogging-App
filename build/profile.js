@@ -1,8 +1,9 @@
 
-import {createUserWithEmailAndPassword , updatePassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { auth, db ,  storage } from "./config.js"
-import { collection, addDoc, Timestamp, query, where, getDocs, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
+
+
+import { onAuthStateChanged, signOut , updatePassword,} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
+import { auth, db ,  } from "./config.js"
+import { collection,  query, where, getDocs,  doc , updateDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 
 
@@ -15,49 +16,77 @@ const newpassword = document.querySelector('#newpassword')
 const repeatpassword = document.querySelector('#repeatpassword')
 
 //logout function
+
 logout.addEventListener('click', () => {
     signOut(auth).then(() => {
-
+        
         window.location = "index.html"
-
-
+        
+        
     }).catch((error) => {
         alert("error")
     });
 })
-
-let picobj;
 onAuthStateChanged(auth, async (user) => {
-    
     if (user) {
-        const uid = user.uid;
+        let uid = user; 
         console.log(uid);
-        const a = await query(collection(db, "users"), where("uid", "==", uid));
+        console.log(auth);
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-        const querySnapshot = await getDocs(a);
-        querySnapshot.forEach((doc) => {
-            picobj = doc.data()
-            console.log(picobj);
-            names.innerHTML = `<p>${picobj.firstName}</p>`
-            name1.innerHTML = `<p>${picobj.firstName}</p>`
-            img.innerHTML = `<img src="${picobj.profileurl}" class="rounded-xl" alt="" width="200px" height="200px">`
+            const querySnapshot = await getDocs(query(collection(db, "users"), where("uid", "==", uid.uid)));
+            querySnapshot.forEach(async (doc) => {
+                const picobj = {
+                    pass: doc.data().Password,
+                    id: doc.id,
+                };
+
+                if (oldpassword.value !== picobj.pass) {
+                    alert('Enter the correct old password');
+                    return;
+                }
+                if (oldpassword.value === newpassword.value) {
+                    alert('Please enter a new password');
+                    return;
+                }
+                if (newpassword.value !== repeatpassword.value) {
+                    alert('Passwords do not match');
+                    return;
+                }
+               
+
+                await updatePassword( user , newpassword.value)
+                .then(async () => {
+                  await updateDoc(doc(db, "users", picobj.id), {
+                    Password: newpassword.value,
+                  });
+                  
+                  form.reset();
+                })
         
-
-        
-        })
+                .catch((error) => {
+                  const errorMessage = error.message;
+                  console.log(errorMessage);
+                });   
+}) 
+})
+}
+else {
+        window.location = "index.html";
     }
-    else {
-        window.location = "index.html"
+    });
 
-    }
-});
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (newpassword.value !== repeatpassword.value) {
-        alert('password are not same');
-        return
-    }
+
+
+
+// form.addEventListener('submit', (event) => {
+//     event.preventDefault();
+//     if (newpassword.value !== repeatpassword.value) {
+//         alert('password are not same');
+//         return
+//     }
     // const user = firebase.auth().currentUser;
     // console.log(user);
     // const newPassword = getASecureRandomPassword();
@@ -68,32 +97,32 @@ form.addEventListener('submit', (event) => {
     //     alert(error)
         
     // });
-    const credentials = firebase.auth.EmailAuthProvider.credential(
-        user.email,
-        oldpassword
-      );
+//     const credentials = firebase.auth.EmailAuthProvider.credential(
+//         user.email,
+//         oldpassword
+//       );
       
-      // Prompt the user to re-authenticate
-      user.reauthenticateWithCredential(credentials)
-        .then(() => {
-          // If reauthentication succeeds, update the password
-          return user.updatePassword(newpassword.value);
-        })
-        .then(() => {
-          // Password updated successfully
-          console.log('Password changed successfully!');
-        })
-        .catch((error) => {
-          // Handle errors, such as incorrect password or others
-          console.error('Error changing password:', error);
-        });
+//       // Prompt the user to re-authenticate
+//       user.reauthenticateWithCredential(credentials)
+//         .then(() => {
+//           // If reauthentication succeeds, update the password
+//           return user.updatePassword(newpassword.value);
+//         })
+//         .then(() => {
+//           // Password updated successfully
+//           console.log('Password changed successfully!');
+//         })
+//         .catch((error) => {
+//           // Handle errors, such as incorrect password or others
+//           console.error('Error changing password:', error);
+//         });
         
         
-        oldpassword.value = ''
-        repeatpassword.value = ''
-        newpassword.value = ''
+//         oldpassword.value = ''
+//         repeatpassword.value = ''
+//         newpassword.value = ''
   
-  })
+//   })
 
 
 
