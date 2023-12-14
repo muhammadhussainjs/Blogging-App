@@ -30,7 +30,9 @@ function renderpost() {
                  </div>
                  <div class="flex flex-wrap gap-3" >
                  <p>${item.picobj.firstName}</p>
-                 <p>${item.postDate.seconds}</p> 
+                 <div>
+                 <p>${item.postDate}</p>
+                 </div> 
                  </div> 
                  </div>
                  </div>
@@ -48,21 +50,27 @@ function renderpost() {
                 
                 
                 const forms = document.querySelectorAll('#forms')
+                let newarray =[]
                 
-               forms.forEach((items , index )=>{
-                items.addEventListener('click' , ()=>{
-                    console.log(array[index]);
-                    addDoc(collection(db, "userclick") , {
-                     arr:array[index]
-                    }) 
+                forms.forEach((items , index )=>{
+                    items.addEventListener('click' , ()=>{
+                        console.log(array[index]);
+                        const obj = {
+                            uid: array[index].uid,
+                            email: array[index].picobj.email,
+                            url: array[index].picobj.profileurl,
+                            name: array[index].picobj.firstName,
+                            area: array[index].area,
+                            text: array[index].text,
+                            date: array[index].postDate
+                    }
+                    console.log(obj);
+                    newarray.push(obj)
+                    const uid = JSON.stringify(newarray);
+                            localStorage.setItem("userDetails", uid);
+                            window.location = "./seeall.html";
+
                     
-                    .then((res) => {
-                        console.log(res);
-                        window.location = "seeall.html"
-                    
-                    }).catch((err) => {
-                        console.log(err);
-                    })
                 })
                
                })

@@ -11,6 +11,22 @@ const form = document.querySelector('#form')
 const uidd = document.querySelector('#uid')
 const names = document.querySelector('#name')
 
+// Date & Time
+const date = new Date();
+console.log(date);
+
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const time = date.getTime();
+console.log(time);
+const monthName = months[date.getMonth()];
+console.log(monthName);
+const day = date.getDate();
+console.log(day);
+const year = date.getFullYear();
+console.log(year);
+const formattedDate = `${monthName}, ${day} ${year}`;
+console.log(formattedDate);
 
 
 let picobj;
@@ -74,7 +90,7 @@ function renderpost() {
        </div>
        <div>
 
-       <p>${item.postDate.seconds}</p> 
+       <p>${item.postDate}</p> 
        </div>
        </div>
     
@@ -134,7 +150,7 @@ form.addEventListener('submit', async (event) => {
             text: text.value,
             area: area.value,
             uid: auth.currentUser.uid,
-            postDate: Timestamp.fromDate(new Date()),
+            postDate: formattedDate,
             picobj
 
         }
