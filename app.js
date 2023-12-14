@@ -30,7 +30,9 @@ function renderpost() {
                  </div>
                  <div class="flex flex-wrap gap-3" >
                  <p>${item.picobj.firstName}</p>
-                 <p>${item.postDate.seconds}</p> 
+                 <div>
+                 <p>${item.postDate}</p>
+                 </div> 
                  </div> 
                  </div>
                  </div>
@@ -59,7 +61,8 @@ function renderpost() {
                             url: array[index].picobj.profileurl,
                             name: array[index].picobj.firstName,
                             area: array[index].area,
-                            text: array[index].text
+                            text: array[index].text,
+                            date: array[index].postDate
                     }
                     console.log(obj);
                     newarray.push(obj)

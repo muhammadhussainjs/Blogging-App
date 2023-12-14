@@ -11,6 +11,8 @@ console.log(user.uid);
 const maindiv = document.querySelector('#maindiv')
 const login = document.querySelector('#login')
 const back = document.querySelector('#back')
+const userpic = document.querySelector('#userpic')
+const allname = document.querySelector('#allname')
 let arr = []
 
 
@@ -47,6 +49,7 @@ login.addEventListener('click' , ()=>{
               </div>
               <div class="flex flex-wrap gap-3" >
                <p>${item.name}</p>
+               <p>${item.date}</p>
                </div> 
                </div>
                </div>
@@ -77,6 +80,12 @@ async function getDataFromuser() {
     querySnapshot.forEach((doc) => {
         array.push({ ...user, docid: doc.id })
         console.log(array);
+        allname.innerHTML = `<p class="font-bold text-3xl pl-60">All from ${array[0].name}</p>`
+        userpic.innerHTML = `<p class="font-semibold text-2xl">${array[0].email}
+        <p class="font-semibold text-2xl">${array[0].name}</p>
+        </p>
+        <img class="w-60 rounded-md h-60" src="${array[0].url}" alt="" >`
+
         
     })
     
