@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.8/dist/full.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="./dist/output.css">
-    <title>dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.8/dist/full.min.css" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="./dist/output.css"> -->
+  <title>dashboard</title>
 </head>
+
 <body class="bg-[#f8f9fa]">
-    <div class="navbar bg-primary text-primary-content gap-4 flex-wrap justify-around bg-[#7c47f6]">
-     <div>  
-       <p class="text-xl">PersonalBloggingApp</p>
-     </div>
-     <div class="gap-6">
-  
-     <div id="name">
-    </div>
+  <div class="navbar bg-primary text-primary-content gap-4 flex-wrap justify-around bg-[#7c47f6]">
     <div>
-      <button><a href="./index.html">Home</a></button>
+      <p class="text-xl">PersonalBloggingApp</p>
     </div>
+    <div class="gap-6">
+
+      <div id="name">
+      </div>
+      <div>
+        <button><a href="./index.html">Home</a></button>
+      </div>
       <div>
         <button><a href="./profile.html">Profile</a></button>
       </div>
-       
-    <div class="gap-4">
-        <button class="btn btn-ghost text-xl" id="logout">logout</button>
-        </div>
-        </div>
-      </div>
-    
 
-      
-      <div class="p-6 md:pl-60 pl-16 bg-[#fefefe]">
-        <h1 class="text-2xl font-bold ">Dashboard</h1>
+      <div class="gap-4">
+        <button class="btn btn-ghost text-xl" id="logout">Logout</button>
       </div>
-      
-      <div class="shadow-xl bg-[#ffffff]  md:ml-60 ml-16 rounded-md mt-4 w-3/5 h-full">
-    <form id="form">
-      <input type="text" id="texts" placeholder=" placeholder" class="h-12 ml-4 mt-4 w-3/4 md:ml-12 rounded-md"><br>
-     <br> <input type="text" id="textarea" placeholder="  What is your mind" class="  w-3/4  h-32  ml-4 sm:ml-12 rounded-md">
-      <br><br>
-      <button class="btn btn-primary bg-[#7c47f6] mb-4 md:ml-12 ml-4">Publishblogs</button>
-    </form>
-      </div>
-      
-      <div class="mt-6">
-      <h1 class="text-3xl md:ml-60 ml-16">My Blogs</h1>
-      </div >
-      <div id="maindiv" class=" md:ml-60 ml-16 w-3/5  " >
     </div>
+  </div>
+
+
+
+  <div class="p-6 md:pl-60 pl-16 bg-[#fefefe]">
+    <h1 class="text-3xl font-bold ">Dashboard</h1>
+  </div>
+
+  <div class="shadow-xl bg-[#ffffff]  md:ml-60 ml-8 w-3/4 rounded-md mt-4 md:w-3/5 h-full">
+    <form id="form">
+      <input type="text" id="texts" placeholder=" Title" class="h-12 border-2 border-inherit text-2xl font-thin ml-4 mt-4 w-3/4 md:ml-12 rounded-md"><br>
+      <br> <input type="text"  id="textarea" placeholder="  What is your mind"
+        class=" break-words border-2 border-inherit w-3/4  h-32  ml-4 sm:ml-12 text-2xl font-thin  rounded-md">
+      <br><br>
+      <button class="btn btn-primary bg-[#7c47f6] mb-8 p-2 w-40 font-bold md:ml-12 ml-4 text-lg">Publish blog</button>
+    </form>
+  </div>
+
+  <div class="mt-6">
+    <h1 class="text-3xl font-semibold md:ml-60 ml-16">My Blogs</h1>
+  </div>
+  <div id="maindiv" class=" md:ml-60 ml-8 w-3/4 md:w-3/5 ">
+  </div>
 
 
 
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="dashboard.js"></script>
 
-<script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="dashboard.js"></script>
-    
 </body>
+
 </html>

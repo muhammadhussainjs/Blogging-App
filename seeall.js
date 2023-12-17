@@ -55,7 +55,7 @@ login.addEventListener('click' , ()=>{
                </div>
             
     
-               <div class="mt-3">
+               <div class="mt-3 mb-6">
                 <p>${item.area}</p>
                 </div>
                
@@ -80,11 +80,11 @@ async function getDataFromuser() {
     querySnapshot.forEach((doc) => {
         array.push({ ...user, docid: doc.id })
         console.log(array);
-        allname.innerHTML = `<p class="font-bold text-3xl pl-60">All from ${array[0].name}</p>`
-        userpic.innerHTML = `<p class="font-semibold text-2xl">${array[0].email}
-        <p class="font-semibold text-2xl">${array[0].name}</p>
-        </p>
-        <img class="w-60 rounded-md h-60" src="${array[0].url}" alt="" >`
+        userpic.innerHTML = `<div class="font-semibold text-1xl">
+        <p class="break-words">${array[0].email}
+        </p></div>
+       <div class="font-bold text-2xl text-[#7c47f6] "> <p>${array[0].name}</p></div>
+      <div>  <img class="sm:w-60 rounded-md sm:h-60  w-32 h-32 " src="${array[0].url}" alt="" ></div>`
 
         
     })

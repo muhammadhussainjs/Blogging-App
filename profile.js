@@ -29,10 +29,10 @@ onAuthStateChanged(auth, async (user) => {
     querySnapshot.forEach(async (doc) => {
         console.log(doc.data());
         pic = doc.data()
-        img.innerHTML = `<img src="${pic.profileurl}" alt="">`
+        img.innerHTML = `<img src="${pic.profileurl}" alt="" class="sm:w-72 sm:h-72 w-48 h-48 rounded-xl">`
         names.innerHTML = `${pic.firstName}`
         name1.innerHTML = `${pic.firstName}`
-        
+
     })
     
 })
@@ -43,7 +43,9 @@ onAuthStateChanged(auth, async (user) => {
 
                 const user = auth.currentUser;
                 if (newpassword.value !== repeatpassword.value) {
-                    alert('Passwords do not match');
+                    Swal.fire({
+                        title: "Password are not same",
+                      });
                     return;
                 }
                
@@ -51,11 +53,16 @@ onAuthStateChanged(auth, async (user) => {
                  updatePassword( user , newpassword.value)
                 .then(() => {
                
-            alert('password change')
+                    Swal.fire({
+                        title: "Password are updated",
+                      });
                 })
         
                 .catch((error) => {
                   const errorMessage = error.message;
+                  Swal.fire({
+                    title: "error",
+                  });
                   console.log(errorMessage);
                 });   
             }) 
@@ -63,6 +70,12 @@ onAuthStateChanged(auth, async (user) => {
 
 logout.addEventListener('click', () => {
     signOut(auth).then(() => {
+       
+            Swal.fire({
+                title: "Logout sucessfully",
+              });
+        
+          
         
         window.location = "index.html"
         

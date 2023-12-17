@@ -19,32 +19,32 @@ function renderpost() {
     maindiv.innerHTML = ''
     array.forEach((item) => {
         console.log(item);
-        maindiv.innerHTML += `<div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-lg  mb-12  shadow-xl pl-3 sm:pl-5">
-        <div class="flex flex-wrap gap-4 pt-6">
-        
-        <div class="rounded-md"><img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt=""></div>
-        <div>
-        <div>
-        
-        <p class="text-2xl"> ${item.text}</p>
-                 </div>
-                 <div class="flex flex-wrap gap-3" >
-                 <p>${item.picobj.firstName}</p>
-                 <div>
-                 <p>${item.postDate}</p>
-                 </div> 
-                 </div> 
-                 </div>
-                 </div>
-                 
-                 
-                 <div class="mt-3">
-                 <p>${item.area}</p>
-                 </div>
-                 <div class="mt-2 mb-2 cursor-pointer" id="forms">
+        maindiv.innerHTML += ` <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-xl  mb-12 shadow-xl pl-3 sm:pl-5">
+        <div class=" flex gap-3 flex-wrap mt-6 ">
+         <div class="rounded-md">
+         <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
+         </div>
+         <div>
+         <p class="text-2xl font-semibold break-words"> ${item.text}</p>
+         <div class="flex gap-1 mt-3 font-normal">
+         <p>${item.picobj.firstName} - </p>
+         <p>${item.postDate}</p>
+         </div> 
+         </div>
+         </div>
+
+         <div>   
+             <p class="text-[#4d4a4a] text-[14px] font-light mt-2 whitespace-normal break-words">
+         ${item.area}</p>
+         </div>
+         
+                 <div class="mt-2 mb-2 cursor-pointer  text-[#b307aeed]" id="forms">
                  <p>see all from this user</p>
                  </div>
                  </div>
+                
+                
+
                  `
                 })
                 

@@ -26,7 +26,9 @@ signin.addEventListener('click' , ()=>{
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     if (password.value !== repeatpassword.value) {
-        alert('password are not same');
+        Swal.fire({
+            title: "password are not same",
+          });
         return
     }
     const file = img.files[0]
@@ -37,6 +39,9 @@ form.addEventListener('submit', (event) => {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     console.log(user);
+                    Swal.fire({
+                        title: "Signup sucessfully",
+                      });
                     addDoc(collection(db, "users"), {
                         firstName: firstname.value,
                         lastName: lastname.value,
@@ -48,17 +53,20 @@ form.addEventListener('submit', (event) => {
                         window.location = "login.html"
                     }).catch((err) => {
                         console.log(err);
+                        alert(err)
                     })
                 })
-        })
+            })
             .catch((error) => {
                 const errorMessage = error.message;
+                
                 console.log(errorMessage);
             });
-    })
-  
+        })
+        
         .catch((error) => {
             const errorMessage = error.message;
+            
             console.log(errorMessage);
         });
         // email.value = ''

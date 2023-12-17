@@ -25,14 +25,14 @@ const day = date.getDate();
 console.log(day);
 const year = date.getFullYear();
 console.log(year);
-const formattedDate = `${monthName}, ${day} ${year}`;
+const formattedDate = `${monthName} ${day}th, ${year}`;
 console.log(formattedDate);
 
 
 let picobj;
 //login and logout function
 onAuthStateChanged(auth, async (user) => {
-    
+
     if (user) {
         const uid = user.uid;
         console.log(uid);
@@ -73,41 +73,32 @@ function renderpost() {
     array.forEach((item) => {
         console.log(item);
         maindiv.innerHTML += `
-        <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-lg  mb-12  shadow-xl pl-3 sm:pl-5">
-        <div class=" gap-4 pt-6">
-        
+        <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-xl  mb-12 shadow-xl pl-3 sm:pl-5">
+        <div class=" flex gap-3 flex-wrap mt-6 ">
          <div class="rounded-md">
          <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
          </div>
+         <div>
+         <p class="text-2xl font-semibold break-words"> ${item.text}</p>
+         <div class="flex gap-1 mt-3 font-normal">
+         <p>${item.picobj.firstName} - </p>
+         <p>${item.postDate}</p>
+         </div> 
+         </div>
+         </div>
 
-        <div>
-
-     <p class="text-2xl"> ${item.text}</p>
-      </div>
-      <div class="flex flex-wrap gap-3" >
-      <div>
-       <p>${item.picobj.firstName}</p>
-       </div>
-       <div>
-
-       <p>${item.postDate}</p> 
-       </div>
-       </div>
-    
-<div class="flex flex-wrap">
-
-
-       <div class="mt-3">
-        <p>${item.area}</p>
-        </div>
-        </div>
-        <div class="flex gap-4 mt-3 pb-6">
-                <button id="delete">Delete</button>
-                <button id="edit">Edit</button>
-                </div>
-                </div>
-        </div>`
-        
+         <div>   
+             <p class="text-[#4d4a4a] text-[14px] font-light mt-2 whitespace-normal break-words">
+         ${item.area}</p>
+         </div>
+         
+         <div class="flex gap-4 mt-3 pb-6 text-[#b307aeed]">
+         <button id="delete">Delete</button>
+         <button id="edit">Edit</button>
+         </div>
+         </div>
+ `        
+         
     })
     const delet = document.querySelectorAll('#delete')
     delet.forEach((item, index) => {
@@ -152,17 +143,21 @@ form.addEventListener('submit', async (event) => {
             uid: auth.currentUser.uid,
             postDate: formattedDate,
             picobj
-
+            
         }
         const docRef = await addDoc(collection(db, "post"), postObj);
         console.log("Document written with ID: ", docRef.id);
         text.value = ""
         area.value = ""
         getDataFromFirestore()
+        Swal.fire({
+            title: "Enter data sucessfully",
+          });
 
     } catch (e) {
         console.error("Error adding document: ", e);
     }
+        
 
 
 })

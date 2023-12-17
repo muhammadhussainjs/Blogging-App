@@ -20,13 +20,16 @@ form.addEventListener('submit' , (e)=>{
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
+      Swal.fire({
+        title: "Login sucessfully",
+      });
       window.location = "dashboard.html"
       
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage)
+     
     })
 
 
