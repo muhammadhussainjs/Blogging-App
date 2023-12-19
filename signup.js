@@ -25,13 +25,25 @@ signin.addEventListener('click' , ()=>{
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if(firstname.value == ''){
+        Swal.fire({
+            title: "please enter your name",
+        });
+        return
+    }
     if (password.value !== repeatpassword.value) {
         Swal.fire({
             title: "password are not same",
-          });
+        });
         return
     }
-    const file = img.files[0]
+    let file = img.files[0]
+ if(!file){
+    Swal.fire({
+        title: "please enter photo",
+      });
+    return
+}
     const storageRef = ref(storage, firstname.value);
     uploadBytes(storageRef, file).then(() => {
         getDownloadURL(storageRef).then((url) => {

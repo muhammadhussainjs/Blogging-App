@@ -20,12 +20,12 @@ function renderpost() {
     array.forEach((item) => {
         console.log(item);
         maindiv.innerHTML += ` <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-xl  mb-12 shadow-xl pl-3 sm:pl-5">
-        <div class=" flex gap-3 flex-wrap mt-6 ">
+        <div class="sm:flex gap-3 mt-6 ">
          <div class="rounded-md">
          <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
          </div>
          <div>
-         <p class="text-2xl font-semibold break-words"> ${item.text}</p>
+         <p class="text-2xl font-semibold break-words sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] "> ${item.text}</p>
          <div class="flex gap-1 mt-3 font-normal">
          <p>${item.picobj.firstName} - </p>
          <p>${item.postDate}</p>

@@ -74,19 +74,24 @@ function renderpost() {
         console.log(item);
         maindiv.innerHTML += `
         <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-xl  mb-12 shadow-xl pl-3 sm:pl-5">
-        <div class=" flex gap-3 flex-wrap mt-6 ">
+        <div class=" sm:flex gap-3 mt-6 ">
          <div class="rounded-md">
          <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
          </div>
          <div>
-         <p class="text-2xl font-semibold break-words"> ${item.text}</p>
+         <div>
+         <p class="text-2xl font-semibold break-words  sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] "> ${item.text}</p>
+         </div>
          <div class="flex gap-1 mt-3 font-normal">
          <p>${item.picobj.firstName} - </p>
          <p>${item.postDate}</p>
+         </div>
          </div> 
          </div>
-         </div>
+         
 
+
+         
          <div>   
              <p class="text-[#4d4a4a] text-[14px] font-light mt-2 whitespace-normal break-words">
          ${item.area}</p>
@@ -103,11 +108,25 @@ function renderpost() {
     const delet = document.querySelectorAll('#delete')
     delet.forEach((item, index) => {
         item.addEventListener('click', async () => {
-            await deleteDoc(doc(db, "post", array[index].docid))
-                .then(() => {
-                    array.splice(index, 1)
-                    renderpost()
-                })
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't to delete",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+              }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await deleteDoc(doc(db, "post", array[index].docid))
+                    .then(() => {
+                        array.splice(index, 1)
+                        renderpost()
+                    })
+    
+                }
+              });
+           
 
         })
     })
