@@ -14,6 +14,9 @@ const password = document.querySelector('#password')
 const repeatpassword = document.querySelector('#rpassword')
 const img = document.querySelector('#img')
 const signin = document.querySelector('#signin')
+const load = document.querySelector('#load')
+const signup = document.querySelector('#signup')
+
 
 signin.addEventListener('click' , ()=>{
   window.location = "login.html"
@@ -25,6 +28,7 @@ signin.addEventListener('click' , ()=>{
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+
     if(firstname.value == ''){
         Swal.fire({
             title: "please enter your name",
@@ -44,13 +48,16 @@ form.addEventListener('submit', (event) => {
       });
     return
 }
-    const storageRef = ref(storage, firstname.value);
-    uploadBytes(storageRef, file).then(() => {
-        getDownloadURL(storageRef).then((url) => {
-            createUserWithEmailAndPassword(auth, email.value, password.value)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    console.log(user);
+
+const storageRef = ref(storage, email.value);
+uploadBytes(storageRef, file).then(() => {
+    getDownloadURL(storageRef).then((url) => {
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+             signup.style.display = "none"
+                load.style.display = "block"
                     Swal.fire({
                         title: "Signup sucessfully",
                       });
@@ -65,20 +72,27 @@ form.addEventListener('submit', (event) => {
                         window.location = "login.html"
                     }).catch((err) => {
                         console.log(err);
+
                         alert(err)
-                    })
+                     })
+                    .finally(()=>{
+                        load.style.display = "none"
+                        signup.style.display = "block"
+                      })
                 })
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                
+                alert(errorMessage)
                 console.log(errorMessage);
             });
         })
         
         .catch((error) => {
             const errorMessage = error.message;
-            
+            Swal.fire({
+                title: "errorMessage",
+              });
             console.log(errorMessage);
         });
         // email.value = ''

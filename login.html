@@ -22,17 +22,20 @@
   
     <div class="shadow-xl bg-[#ffffff] py-14 mb-6 w-4/5 sm:w-3/4 md:w-2/5 flex justify-center ">
     <form id="form">
-      <input type="text" id="email" placeholder=" ENTER EMAIL" class="p-3 sm:w-60 w-48   rounded-md"><br><br>
-      <input type="password" id="password" placeholder=" ENTER PASSWORD" class="p-3 sm:w-60 w-48  rounded-md">
+      <input type="text" id="email" placeholder=" ENTER EMAIL" class="p-3 sm:w-60 w-48  border-2 border-inherit rounded-md"><br><br>
+      <input type="password" id="password" placeholder=" ENTER PASSWORD" class="p-3 sm:w-60 w-48 border-2 border-inherit rounded-md">
       <br><br>
-      <button class="btn bg-[#7e52e5] hover:bg-[#5d35bb] sm:w-60 w-48">Login</button>
-      <br><br>
+      <div>
+      <button class="btn bg-[#7e52e5]  hover:bg-[#5d35bb] sm:w-60 w-48" id="login">Login</button>
+      <span class="loading loading-spinner loading-md hidden ml-20" id="load"></span>
+      </div>
+      <br>
       
-        <button class= "btn bg-[#7e52e5] hover:bg-[#5d35bb] sm:w-60 w-48 " id="google">LOGIN WITH GOOGLE</button>
-        <br><br>
-        <button class="btn sm:w-60 w-48  bg-[#7e52e5] hover:bg-[#5d35bb] " id="github">LOGIN WITH GITHUB</button>
+      <button class= "btn bg-[#7e52e5] hover:bg-[#5d35bb] sm:w-60 w-48 " id="google">LOGIN WITH GOOGLE</button>
       <br><br>
-      <p class=" text-center "><a href="./signup.html">Dont have,n account</a></p>
+      <button class="btn sm:w-60 w-48  bg-[#7e52e5] hover:bg-[#5d35bb] " id="github">LOGIN WITH GITHUB</button>
+      <br><br>
+      <p class=" text-center "><a href="./signup.html">Dont have,n account , Signup</a></p>
     </form>
   </div>
 </div>

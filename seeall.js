@@ -77,9 +77,9 @@ async function getDataFromuser() {
         array.push({ ...user, docid: doc.id })
         console.log(array);
         userpic.innerHTML = `<div class="font-semibold text-1xl">
-        <p class="break-words">${array[0].email}
+        <p class="break-words max-w-[120px] sm:max-w-[140px] lg:max-w-[240px]">${array[0].email}
         </p></div>
-       <div class="font-bold text-2xl text-[#7c47f6] "> <p>${array[0].name}</p></div>
+       <div class="font-bold text-2xl text-[#7c47f6] max-w-[120px] sm:max-w-[140px] lg:max-w-[240px] break-words "> <p>${array[0].name}</p></div>
       <div>  <img class="sm:w-60 rounded-md sm:h-60  w-32 h-32 " src="${array[0].url}" alt="" ></div>`
 
         

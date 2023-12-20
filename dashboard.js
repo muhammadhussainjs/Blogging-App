@@ -10,6 +10,7 @@ const maindiv = document.querySelector('#maindiv')
 const form = document.querySelector('#form')
 const uidd = document.querySelector('#uid')
 const names = document.querySelector('#name')
+const pic = document.querySelector('#pic')
 
 // Date & Time
 const date = new Date();
@@ -43,9 +44,10 @@ onAuthStateChanged(auth, async (user) => {
             picobj = doc.data()
             console.log(picobj);
             names.innerHTML = `<p>${picobj.firstName}</p>`
+            pic.innerHTML = ` <img src="${picobj.profileurl}" alt="" class="w-16 h-12 rounded-md">`
 
-            getDataFromFirestore()
         })
+        getDataFromFirestore()
     }
     else {
         window.location = "index.html"
@@ -68,6 +70,66 @@ logout.addEventListener('click', () => {
 })
 
 
+
+
+
+//adddocs
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if(text.value == '' || area.value == ''){
+        Swal.fire({
+            title: "please enter title and description",
+        });
+        return
+    }
+
+    try {
+        const postObj = {
+            text: text.value,
+            area: area.value,
+            uid: auth.currentUser.uid,
+            postDate: formattedDate,
+            picobj
+            
+        }
+        const docRef = await addDoc(collection(db, "post"), postObj);
+        console.log("Document written with ID: ", docRef.id);
+        Swal.fire({
+            title: "Enter data sucessfully",
+        });
+        getDataFromFirestore()
+        text.value = ""
+        area.value = ""
+        
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+    
+   
+    
+})
+
+
+let array = []
+//getdocs
+async function getDataFromFirestore() {
+    array = []
+    const q = await query(collection(db, "post"), orderBy('postDate', 'desc'), where("uid", "==", picobj.uid));
+    
+    
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        array.push({ ...doc.data(), docid: doc.id })
+        console.log(array);
+    });
+    
+    renderpost()
+    
+    
+}
+
+
 function renderpost() {
     maindiv.innerHTML = ''
     array.forEach((item) => {
@@ -75,59 +137,59 @@ function renderpost() {
         maindiv.innerHTML += `
         <div class="bg-[#ffffff] border-2 border-inherit mt-12 rounded-xl  mb-12 shadow-xl pl-3 sm:pl-5">
         <div class=" sm:flex gap-3 mt-6 ">
-         <div class="rounded-md">
-         <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
-         </div>
-         <div>
-         <div>
-         <p class="text-2xl font-semibold break-words  sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] "> ${item.text}</p>
-         </div>
-         <div class="flex gap-1 mt-3 font-normal">
-         <p>${item.picobj.firstName} - </p>
-         <p>${item.postDate}</p>
-         </div>
-         </div> 
-         </div>
-         
-
-
-         
-         <div>   
-             <p class="text-[#4d4a4a] text-[14px] font-light mt-2 whitespace-normal break-words">
-         ${item.area}</p>
-         </div>
-         
-         <div class="flex gap-4 mt-3 pb-6 text-[#b307aeed]">
-         <button id="delete">Delete</button>
-         <button id="edit">Edit</button>
-         </div>
-         </div>
- `        
-         
+        <div class="rounded-md">
+        <img class="w-20 h-20  rounded-md" src="${item.picobj.profileurl}" alt="">
+        </div>
+        <div>
+        <div>
+        <p class="text-2xl font-semibold break-words  sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] "> ${item.text}</p>
+        </div>
+        <div class="flex gap-1 mt-3 font-normal">
+        <p>${item.picobj.firstName} - </p>
+        <p>${item.postDate}</p>
+        </div>
+        </div> 
+        </div>
+        
+        
+        
+        
+        <div>   
+        <p class="text-[#4d4a4a] text-[14px] font-light mt-2 whitespace-normal break-words">
+        ${item.area}</p>
+        </div>
+        
+        <div class="flex gap-4 mt-3 pb-6 text-[#b307aeed]">
+        <button id="delete">Delete</button>
+        <button id="edit">Edit</button>
+        </div>
+        </div>
+        `        
+        
     })
     const delet = document.querySelectorAll('#delete')
     delet.forEach((item, index) => {
         item.addEventListener('click', async () => {
             Swal.fire({
                 title: "Are you sure?",
-                text: "You won't to delete",
+            text: "You won't to delete",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!"
-              }).then(async (result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     await deleteDoc(doc(db, "post", array[index].docid))
                     .then(() => {
                         array.splice(index, 1)
-                        renderpost()
+                        getDataFromFirestore()
                     })
-    
+                    
                 }
-              });
-           
-
+            });
+            
+            
         })
     })
     const edit = document.querySelectorAll('#edit')
@@ -142,70 +204,11 @@ function renderpost() {
             });
             array[index].text = updatedTitle;
             array[index].area = updateddescription;
-            renderpost()
+            getDataFromFirestore()
 
         })
     })
-
-
+    
+    
 }
-
-
-
-//adddocs
-form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    try {
-        const postObj = {
-            text: text.value,
-            area: area.value,
-            uid: auth.currentUser.uid,
-            postDate: formattedDate,
-            picobj
-            
-        }
-        const docRef = await addDoc(collection(db, "post"), postObj);
-        console.log("Document written with ID: ", docRef.id);
-        text.value = ""
-        area.value = ""
-        getDataFromFirestore()
-        Swal.fire({
-            title: "Enter data sucessfully",
-          });
-
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
-        
-
-
-})
-
-
-//getdocs
-let array = []
-async function getDataFromFirestore() {
-
-    array = []
-
-    const q = await query(collection(db, "post"), orderBy('postDate', 'desc'), where("uid", "==", picobj.uid));
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        array.push({ ...doc.data(), docid: doc.id })
-        console.log(array);
-    });
-    renderpost()
-
-
-}
-
-
-
-
-
-
-
-
 

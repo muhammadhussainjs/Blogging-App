@@ -61,7 +61,7 @@ onAuthStateChanged(auth, async (user) => {
                 .catch((error) => {
                   const errorMessage = error.message;
                   Swal.fire({
-                    title: "error",
+                    title: errorMessage,
                   });
                   console.log(errorMessage);
                 });   

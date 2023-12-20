@@ -9,6 +9,8 @@ const password = document.querySelector('#password')
 const google = document.querySelector('#google')
 const github = document.querySelector('#github')
 const signup = document.querySelector('#signup')
+const load = document.querySelector('#load')
+const login = document.querySelector('#login')
 
 
 signup.addEventListener('click' , ()=>{
@@ -17,12 +19,13 @@ signup.addEventListener('click' , ()=>{
 
 form.addEventListener('submit' , (e)=>{
     e.preventDefault()
+
+    login.style.display = "none"
+    load.style.display = "block"
+
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
-      Swal.fire({
-        title: "Login sucessfully",
-      });
       window.location = "dashboard.html"
       
     })
@@ -30,9 +33,13 @@ form.addEventListener('submit' , (e)=>{
       const errorCode = error.code;
       const errorMessage = error.message;
       Swal.fire({
-        title: errorMessage,
+        title: "error",
       });
+      
      
+    }).finally(()=>{
+      load.style.display = "none"
+      login.style.display = "block"
     })
 
 
