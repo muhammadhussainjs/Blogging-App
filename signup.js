@@ -16,7 +16,26 @@ const img = document.querySelector('#img')
 const signin = document.querySelector('#signin')
 const load = document.querySelector('#load')
 const signup = document.querySelector('#signup')
+const eye = document.querySelector('#eye')
+const eyes = document.querySelector('#eyes')
+const div = document.querySelector('#div')
 
+
+eye.addEventListener('click' , ()=>{
+    if(password.type == "password"){
+        password.type = "text"
+    }else{
+        password.type = "password"
+    }
+})
+
+eyes.addEventListener('click' , ()=>{
+    if(repeatpassword.type == "password"){
+        repeatpassword.type = "text"
+    }else{
+        repeatpassword.type = "password"
+    }
+})
 
 signin.addEventListener('click' , ()=>{
   window.location = "login.html"

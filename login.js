@@ -13,6 +13,15 @@ const load = document.querySelector('#load')
 const login = document.querySelector('#login')
 
 
+eye.addEventListener('click' , ()=>{
+  if(password.type == "password"){
+      password.type = "text"
+  }else{
+      password.type = "password"
+  }
+})
+
+
 signup.addEventListener('click' , ()=>{
   window.location = "signup.html"
 })
