@@ -75,11 +75,11 @@ uploadBytes(storageRef, file).then(() => {
         .then((userCredential) => {
             const user = userCredential.user;
             console.log(user);
-             signup.style.display = "none"
-                load.style.display = "block"
-                    Swal.fire({
-                        title: "Signup sucessfully",
-                      });
+            
+
+                signup.style.display = "none"
+                   load.style.display = "block"        
+            
                     addDoc(collection(db, "users"), {
                         firstName: firstname.value,
                         lastName: lastname.value,

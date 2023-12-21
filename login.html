@@ -18,33 +18,46 @@
   <div class="p-6 bg-[#fefefe]">
     <h1 class="text-2xl font-bold sm:pl-60 pl-16">LOGIN</h1>
   </div>
-  <div class="flex justify-center mt-6 ">
-  
-    <div class="shadow-xl bg-[#ffffff] py-14 mb-6 w-4/5 sm:w-3/4 md:w-2/5 flex justify-center ">
+  <div class="flex  justify-center mt-6 ">
+
+    
+  <div class="shadow-xl bg-[#ffffff] py-14 mb-6 w-4/5 sm:w-3/4 md:w-2/5 flex justify-center ">
+  <div class="flex flex-col">
     <form id="form">
-      <input type="text" id="email" placeholder=" ENTER EMAIL" class="p-3 sm:w-60 w-48  border-2 border-inherit rounded-md outline-0"><br><br>
-      <div class="border-2 border-inherit  w-48 sm:w-60 items-center rounded-md flex ">
-        <input type="password" id="password" placeholder=" ENTER PASSWORD" class="w-[100%]  p-3 border-0 outline-0">
-        <i class="fa-regular fa-eye  w-8 cursor-pointer" id="eye"></i></div><br>
-        
-      <div>
-      <button class="btn bg-[#7e52e5]  hover:bg-[#5d35bb] sm:w-60 w-48" id="login">Login</button>
-      <span class="loading loading-spinner loading-md hidden ml-20" id="load"></span>
-      </div>
-      <br>
-      
-      <button class= "btn bg-[#7e52e5] hover:bg-[#5d35bb] sm:w-60 w-48 " id="google">LOGIN WITH GOOGLE</button>
+<div>
+        <input type="text" id="email" placeholder=" ENTER EMAIL"
+          class="p-3 sm:w-60 w-48  border-2 border-inherit rounded-md outline-0">
+        <br><br>
+</div>
+        <div class="border-2 border-inherit  w-48 sm:w-60 items-center rounded-md flex ">
+          <input type="password" id="password" placeholder=" ENTER PASSWORD" class="w-[100%]  p-3 border-0 outline-0">
+          <i class="fa-regular fa-eye  w-8 cursor-pointer" id="eye"></i>
+        </div><br>
+        <div>
+          <a href="./forgot.html" class="ml-16  text-[#5d35bb]">Forgot Password</a>
+        <br><br>
+        <button class="btn bg-[#7e52e5]  hover:bg-[#5d35bb] sm:w-60 w-48" id="login">Login</button>
+        <span class="loading loading-spinner loading-md hidden ml-20" id="load"></span>
+    </div>
+    </form>
+<br>
+
+    <div>
+      <button class="btn bg-[#7e52e5] hover:bg-[#5d35bb] sm:w-60 w-48 " id="google">LOGIN WITH GOOGLE</button>
       <br><br>
       <button class="btn sm:w-60 w-48  bg-[#7e52e5] hover:bg-[#5d35bb] " id="github">LOGIN WITH GITHUB</button>
       <br><br>
-      <p class=" text-center "><a href="./signup.html">Dont have,n account , Signup</a></p>
-    </form>
+      <p class=" text-center text-[#5d35bb] "><a href="./signup.html">Dont have,n account , Signup</a></p>
+    </div>
+    </div>
   </div>
-</div>
+  </div>
   
 
-<script src="https://kit.fontawesome.com/9aded8b196.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <script src="https://kit.fontawesome.com/9aded8b196.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script type="module" src="login.js"></script>
