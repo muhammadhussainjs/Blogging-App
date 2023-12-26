@@ -44,7 +44,7 @@ onAuthStateChanged(auth, async (user) => {
             picobj = doc.data()
             console.log(picobj);
             names.innerHTML = `<p>${picobj.firstName}</p>`
-            pic.innerHTML = ` <img src="${picobj.profileurl}" alt="" class="w-16 h-12 rounded-md">`
+            pic.innerHTML = ` <img src="${picobj.profileurl}" alt="" class="w-16 h-12 rounded-full">`
 
         })
         getDataFromFirestore()
