@@ -18,11 +18,17 @@ let arr = []
 
 
 
-back.addEventListener('click' , ()=>{
-   
-       window.location = "index.html"
-    })
-      
+// Custom Back Button
+back.addEventListener('click', () => {
+    localStorage.removeItem('userDetails'); // Old user data ko clear karna
+    window.location = "index.html";
+});
+
+// Browser Back Button
+window.onpopstate = () => {
+    localStorage.removeItem('userDetails'); // Old user data ko clear karna
+};
+
   
 
 
