@@ -69,6 +69,7 @@ login.addEventListener('click' , ()=>{
 
 
 async function getDataFromuser() {
+    array = []
     
     const q = await query(collection(db, "post") , where("uid" , "==" , user.uid) );
     
@@ -86,7 +87,7 @@ async function getDataFromuser() {
     })
     
      renderpost()
-     array = ''
+     
     
     
 }
