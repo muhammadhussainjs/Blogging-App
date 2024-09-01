@@ -24,19 +24,11 @@ back.addEventListener('click', () => {
     localStorage.removeItem('userDetails'); // Old user data ko clear karna
     window.location = "index.html";
 });
+window.onpopstate('click', () => {
+    localStorage.removeItem('userDetails'); // Old user data ko clear karna
+    window.location = "index.html";
+});
 
-// Browser Back Button
-window.onpopstate = (event) => {
-    if (event.state && event.state.userId) {
-        // Fetch the data again or handle the state accordingly
-        user = { uid: event.state.userId }; // Set the user ID from history state
-        getDataFromuser(); // Re-fetch data based on user ID
-    } else {
-        localStorage.removeItem('userDetails'); // Clear data if no specific state
-        window.location = "index.html"; // Go back to home page
-    }
-};
-  
 
 
 
@@ -100,7 +92,7 @@ async function getDataFromuser() {
     })
     
      renderpost()
-     window.history.pushState({ userId: user.uid }, null, window.location.href);
+  
     
     
 }
