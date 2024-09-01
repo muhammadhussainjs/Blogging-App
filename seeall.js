@@ -117,6 +117,7 @@ const maindiv = document.querySelector('#maindiv');
 const login = document.querySelector('#login');
 const back = document.querySelector('#back');
 const userpic = document.querySelector('#userpic');
+let array = []
 
 // Custom Back Button
 back.addEventListener('click', () => {
