@@ -86,6 +86,7 @@ async function getDataFromuser() {
     })
     
      renderpost()
+     array = ''
     
     
 }
