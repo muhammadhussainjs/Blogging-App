@@ -25,6 +25,12 @@ back.addEventListener('click', () => {
     window.location = "index.html";
 });
 
+
+window.onload = () => {
+    // Clear local storage on page load for testing
+    localStorage.removeItem('userDetails');
+};
+
 window.onpopstate = function () {
     localStorage.removeItem('userDetails'); // Clear old user data
     window.location.href = "index.html"; // Use href for redirection
