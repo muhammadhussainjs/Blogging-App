@@ -18,6 +18,8 @@ let arr = []
 
 
 
+window.history.pushState({ userId: user.uid }, null, window.location.href);
+
 // Custom Back Button
 back.addEventListener('click', () => {
     localStorage.removeItem('userDetails'); // Old user data ko clear karna
@@ -25,8 +27,11 @@ back.addEventListener('click', () => {
 });
 
 // Browser Back Button
-window.onpopstate = () => {
-    localStorage.removeItem('userDetails'); // Old user data ko clear karna
+window.onpopstate = (event) => {
+    if (event.state && event.state.userId) {
+        localStorage.removeItem('userDetails'); // Old user data ko clear karna
+        window.location = "index.html";
+    }
 };
 
   
