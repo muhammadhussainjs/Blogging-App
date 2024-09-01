@@ -26,17 +26,18 @@ back.addEventListener('click', () => {
 });
 
 
-window.onload = () => {
-    // Clear local storage on page load for testing
-    localStorage.removeItem('userDetails');
-};
+// جب آپ اپنی سائٹ پر کسی نئی ریاست کو push کرتے ہیں
+window.history.pushState({ userId: user.uid }, null, window.location.href);
 
-window.onpopstate = function () {
+// `popstate` ایونٹ کو handle کریں
+window.onpopstate = () => {
     localStorage.removeItem('userDetails'); // Clear old user data
-    window.location.href = "index.html"; // Use href for redirection
+    window.location = "index.html"; // Redirect to home page
 };
-
-
+window.addEventListener('popstate', function (event) {
+    localStorage.removeItem('userDetails'); // Clear old user data
+    window.location = "index.html"; // Redirect to home page
+});
 
 
 
