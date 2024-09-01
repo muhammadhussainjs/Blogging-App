@@ -24,11 +24,10 @@ back.addEventListener('click', () => {
     localStorage.removeItem('userDetails'); // Old user data ko clear karna
     window.location = "index.html";
 });
-window.onpopstate('click', () => {
-    localStorage.removeItem('userDetails'); // Old user data ko clear karna
-    window.location = "index.html";
-});
-
+window.onpopstate = () => {
+    localStorage.removeItem('userDetails'); // Clear old user data
+    window.location = "index.html"; // Redirect to home page
+};
 
 
 
