@@ -22,10 +22,16 @@ back.addEventListener('click', () => {
     
     window.location = "index.html";
 });
-window.addEventListener('popstate', function (event) {
-    window.location.reload(); // Reload the page without clearing localStorage
-});
+function clearLocalStorageAndReload() {
+    console.log("Clearing localStorage and reloading");
+    localStorage.removeItem('userDetails');
+    window.location.reload();
+}
 
+window.addEventListener('popstate', function () {
+    console.log("Popstate event triggered");
+    clearLocalStorageAndReload();
+});
 
 
 
