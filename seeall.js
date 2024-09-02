@@ -84,7 +84,7 @@ login.addEventListener('click' , ()=>{
 async function getDataFromuser() {
     array = []
     
-    const q = await query(collection(db, "post") , where("uid" , "==" , user.uid) );
+    const q = await query(collection(db, "post") , where("uid" , "==" , user.uid) , { cache: "no-store" });
     
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
