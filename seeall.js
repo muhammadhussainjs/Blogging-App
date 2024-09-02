@@ -26,17 +26,12 @@ back.addEventListener('click', () => {
 });
 
 
-// جب آپ اپنی سائٹ پر کسی نئی ریاست کو push کرتے ہیں
-window.history.pushState({ userId: user.uid }, null, window.location.href);
-
-// `popstate` ایونٹ کو handle کریں
-window.onpopstate = () => {
-    localStorage.removeItem('userDetails'); // Clear old user data
-    window.location = "index.html"; // Redirect to home page
-};
+function clearLocalStorageAndReload() {
+    localStorage.removeItem('userDetails');
+    window.location.reload();
+}
 window.addEventListener('popstate', function (event) {
-    localStorage.removeItem('userDetails'); // Clear old user data
-    window.location = "index.html"; // Redirect to home page
+    clearLocalStorageAndReload();
 });
 
 
@@ -75,7 +70,6 @@ login.addEventListener('click' , ()=>{
     
     
 }
-
 
 
 
