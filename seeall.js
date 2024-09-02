@@ -32,6 +32,7 @@ function clearLocalStorageAndReload() {
 }
 window.addEventListener('popstate', function (event) {
     clearLocalStorageAndReload();
+    getDataFromuser()
 });
 
 
